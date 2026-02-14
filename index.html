@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Strona z tłem</title>
+  <title>kiti kat</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      min-height: 100vh;
       background-image: url('bleh.png');
       background-size: cover;
       background-position: center;
       font-family: Arial, sans-serif;
       color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
     }
 
-    a {
-      color: white;
+    .top-text {
       font-size: 24px;
-      text-decoration: none;
-      padding: 10px 20px;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 5px;
-      transition: 0.3s;
+      text-shadow: 2px 2px 5px black;
+      margin-top: 20px;
     }
 
-    a:hover {
+    .middle-button {
+      font-size: 28px;
+      color: white;
+      text-decoration: none;
+      padding: 15px 30px;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 8px;
+      transition: 0.3s;
+      margin: auto 0;
+    }
+
+    .middle-button:hover {
       background-color: rgba(0,0,0,0.8);
+    }
+
+    .bottom-text {
+      font-size: 22px;
+      text-shadow: 2px 2px 5px black;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <a href="#">Kliknij mnie</a>
+  <div class="top-text">
+    Wiem że minely juz walentynki i nie chcialaś tego ale
+  </div>
+
+  <a href="#" class="middle-button">Kliknij mnie</a>
+
+  <div class="bottom-text">
+    koham cie twin baardzoo jak na bff przystalo cn
+  </div>
 </body>
 </html>
