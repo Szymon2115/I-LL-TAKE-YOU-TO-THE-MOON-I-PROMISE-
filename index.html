@@ -13,29 +13,29 @@
       color: white;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       text-align: center;
       padding: 20px;
     }
 
-    .top-text {
+    .top-text, .bottom-text {
       font-size: 24px;
+      font-weight: bold; /* grubość jak napisy */
       text-shadow: 2px 2px 5px black;
-      margin-top: 20px;
+      margin: 10px 0;
     }
 
     .middle-area {
-      margin: auto 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      min-height: 300px; /* minimum miejsce na obraz */
-      background-color: #2a0d36; /* ciemny fiolet */
+      padding: 20px;
       border-radius: 12px;
+      background-color: transparent; /* startowo nic nie widać */
       transition: 0.3s;
-      position: relative;
+      max-width: 80%; /* nie cała strona */
     }
 
     .middle-button {
@@ -47,51 +47,51 @@
       border-radius: 8px;
       transition: 0.3s;
       cursor: pointer;
-      z-index: 2;
     }
 
     .middle-button:hover {
       background-color: rgba(0,0,0,0.8);
     }
 
-    .bottom-text {
-      font-size: 22px;
-      text-shadow: 2px 2px 5px black;
-      margin-bottom: 20px;
-    }
-
     .hidden-img {
       display: none;
-      max-width: 90%;
+      max-width: 100%;
       max-height: 400px;
+      margin-bottom: 20px;
       border-radius: 12px;
       box-shadow: 0 0 20px black;
     }
   </style>
 </head>
 <body>
-  <div class="top-text">
-    Wiem że minely juz walentynki i nie chcialaś tego ale
-  </div>
 
-  <div class="middle-area">
+  <div class="middle-area" id="middleArea">
     <a href="#" class="middle-button" id="clickBtn">Kliknij mnie</a>
     <img src="kebab.jfif" alt="Kebab" class="hidden-img" id="kebabImg">
-  </div>
-
-  <div class="bottom-text">
-    koham cie twin baardzoo jak na bff przystalo cn
+    <div class="top-text" id="topText">Wiem że minely juz walentynki i nie chcialaś tego ale</div>
+    <div class="bottom-text" id="bottomText">koham cie twin baardzoo jak na bff przystalo cn</div>
   </div>
 
   <script>
     const btn = document.getElementById('clickBtn');
     const img = document.getElementById('kebabImg');
+    const area = document.getElementById('middleArea');
+    const topText = document.getElementById('topText');
+    const bottomText = document.getElementById('bottomText');
+
+    // startowo ukryte
+    topText.style.display = 'none';
+    bottomText.style.display = 'none';
 
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      btn.style.display = 'none'; // ukrywa przycisk
-      img.style.display = 'block'; // pokazuje obrazek
+      btn.style.display = 'none';
+      area.style.backgroundColor = '#2a0d36'; // fiolet w środku
+      img.style.display = 'block';
+      topText.style.display = 'block';
+      bottomText.style.display = 'block';
     });
   </script>
+
 </body>
 </html>
