@@ -34,6 +34,7 @@
       border-radius: 8px;
       transition: 0.3s;
       margin: auto 0;
+      cursor: pointer;
     }
 
     .middle-button:hover {
@@ -45,6 +46,15 @@
       text-shadow: 2px 2px 5px black;
       margin-bottom: 20px;
     }
+
+    .hidden-img {
+      display: none;
+      max-width: 80%;
+      margin-top: 20px;
+      border: 4px solid white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px black;
+    }
   </style>
 </head>
 <body>
@@ -52,10 +62,22 @@
     Wiem że minely juz walentynki i nie chcialaś tego ale
   </div>
 
-  <a href="#" class="middle-button">Kliknij mnie</a>
+  <a href="#" class="middle-button" id="clickBtn">Kliknij mnie</a>
 
   <div class="bottom-text">
     koham cie twin baardzoo jak na bff przystalo cn
   </div>
+
+  <img src="kebab.jfif" alt="Kebab" class="hidden-img" id="kebabImg">
+
+  <script>
+    const btn = document.getElementById('clickBtn');
+    const img = document.getElementById('kebabImg');
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); // żeby nie skakało do góry strony
+      img.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
