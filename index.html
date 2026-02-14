@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>blep</title>
+  <title>kiti kat</title>
   <style>
     body {
       margin: 0;
@@ -17,6 +17,7 @@
       text-align: center;
     }
 
+    /* Fioletowy środek */
     .middle-area {
       display: flex;
       flex-direction: column;
@@ -26,16 +27,19 @@
       background-color: transparent;
       max-width: 80%;
       transition: 0.3s;
+      position: relative;
+      z-index: 5;
     }
 
     .middle-button {
       font-size: 28px;
       color: white;
+      text-decoration: none;
       padding: 15px 30px;
       background-color: rgba(0,0,0,0.5);
-      border: none;
       border-radius: 8px;
       cursor: pointer;
+      z-index: 10;
     }
 
     .middle-button:hover {
@@ -58,16 +62,32 @@
       text-shadow: 2px 2px 5px black;
       margin: 5px 0;
     }
+
+    /* overlay żeby kliknięcie poza prostokątem działało */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
 
   <div class="middle-area" id="middleArea">
-    <button class="middle-button" id="clickBtn">Kliknij mnie</button>
+    <a href="#" class="middle-button" id="clickBtn">Kliknij mnie</a>
     <img src="kebab.jfif" alt="Kebab" class="kebab-img" id="kebabImg">
     <div class="text-below" id="topText">Wiem że minely juz walentynki i nie chcialaś tego ale</div>
     <div class="text-below" id="bottomText">koham cie twin baardzoo jak na bff przystalo cn</div>
   </div>
+
+  <div class="overlay" id="overlay"></div>
 
   <script>
     const btn = document.getElementById('clickBtn');
@@ -75,13 +95,31 @@
     const area = document.getElementById('middleArea');
     const topText = document.getElementById('topText');
     const bottomText = document.getElementById('bottomText');
+    const overlay = document.getElementById('overlay');
 
-    btn.addEventListener('click', () => {
-      btn.style.display = 'none';                
-      area.style.backgroundColor = '#2a0d36';    
-      img.style.display = 'block';               
-      topText.style.display = 'block';           
-      bottomText.style.display = 'block';        
+    // startowo ukryte obraz i napisy
+    img.style.display = 'none';
+    topText.style.display = 'none';
+    bottomText.style.display = 'none';
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      btn.style.display = 'none';
+      area.style.backgroundColor = '#2a0d36';
+      img.style.display = 'block';
+      topText.style.display = 'block';
+      bottomText.style.display = 'block';
+      overlay.style.display = 'flex'; // pokaz overlay żeby klik poza działał
+    });
+
+    // klik na overlay = zamyka wszystko
+    overlay.addEventListener('click', () => {
+      img.style.display = 'none';
+      topText.style.display = 'none';
+      bottomText.style.display = 'none';
+      area.style.backgroundColor = 'transparent';
+      btn.style.display = 'block';
+      overlay.style.display = 'none';
     });
   </script>
 
