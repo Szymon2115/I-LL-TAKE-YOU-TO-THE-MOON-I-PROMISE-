@@ -176,7 +176,6 @@
     <img src="nugat.jfif" alt="nugat" class="nugat-img" id="nugatImg">
     <div class="text-below" id="topText">Wiem że minely juz walentynki i nie chcialaś tego ale</div>
     <div class="text-below" id="bottomText">koham cie twin baardzoo jak na bff przystalo cn</div>
-    <a href="#" class="middle-button" id="closeMiddleBtn">Zamknij</a>
   </div>
 
   <script>
@@ -203,21 +202,14 @@
     });
     
     // zamknij środek klikając w tło lub elementy wewnątrz
-    area.addEventListener('click', (e) => {
-      // jeśli kliknięcie nie jest w przycisku (tylko przycisk byłby ignorowany)
-      if (!e.target.classList.contains('middle-button')) {
-        img.classList.remove('show');
-        topText.classList.remove('show');
-        bottomText.classList.remove('show');
-        area.style.backgroundColor = 'transparent';
-        btn.style.display = 'block';
-       }
+    overlay.addEventListener('click', () => {
+      sidePanel.classList.remove('active');
+      overlay.style.display = 'none';
     });
-
-
+    
     // klik puszin → panel prawy
     puszinBtn.addEventListener('click', () => {
-      sidePanel.classList.add('active');
+      midlePanel.classList.add('active');
       overlay.style.display = 'block';
     });
 
