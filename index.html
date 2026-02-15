@@ -142,11 +142,6 @@
 </head>
 <body>
 
-  <!-- muzyka w tle -->
-  <audio autoplay loop style="display:none">
-    <source src="I Really Want to Stay At Your House by Rosa Walton _ Music Video.mp3" type="audio/mpeg">
-  </audio>
-
   <!-- Puszin -->
   <div class="top-right-box" id="puszinBtn">
     <img src="puszin.jfif" alt="puszin">
@@ -163,8 +158,7 @@
       <li>jesteś wspaniałaaaaaaaaaa</li>
       <li>zawsze przy tobie sie uśmiecham</li>
       <li>jesteś bardzo ładna</li>
-      </ul>
-  
+    </ul>
   </div>
 
   <!-- Overlay -->
@@ -189,7 +183,11 @@
     const topText = document.getElementById('topText');
     const bottomText = document.getElementById('bottomText');
 
-    // klik środek → pokazuj środek
+    // muzyka
+    const audio = new Audio("I Really Want to Stay At Your House by Rosa Walton _ Music Video.mp3");
+    audio.loop = true;
+
+    // klik środek → pokazuj środek + start muzyki
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       btn.style.display = 'none';
@@ -197,7 +195,11 @@
       img.classList.add('show');
       topText.classList.add('show');
       bottomText.classList.add('show');
-      overlay.style.display = 'block'; // teraz overlay obsługuje zamykanie środka i prawego
+      overlay.style.display = 'block';
+
+      audio.play().catch(() => {
+        console.log("Musisz kliknąć lub odblokować dźwięk w przeglądarce.");
+      });
     });
 
     // klik puszin → pokaż panel prawy
