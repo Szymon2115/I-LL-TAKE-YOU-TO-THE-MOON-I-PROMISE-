@@ -201,27 +201,19 @@
       topText.classList.add('show');
       bottomText.classList.add('show');
     });
-
-    // zamknij środek przycisk
-    closeMiddleBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      img.classList.remove('show');
-      topText.classList.remove('show');
-      bottomText.classList.remove('show');
-      area.style.backgroundColor = 'transparent';
-      btn.style.display = 'block';
-    });
-
-    // zamknij środek klikając w tło
+    
+    // zamknij środek klikając w tło lub elementy wewnątrz
     area.addEventListener('click', (e) => {
-      if (e.target === area) { // tylko jeśli klik w tło, nie w obrazek/tekst/przycisk
+      // jeśli kliknięcie nie jest w przycisku (tylko przycisk byłby ignorowany)
+      if (!e.target.classList.contains('middle-button')) {
         img.classList.remove('show');
         topText.classList.remove('show');
         bottomText.classList.remove('show');
         area.style.backgroundColor = 'transparent';
         btn.style.display = 'block';
-      }
+       }
     });
+
 
     // klik puszin → panel prawy
     puszinBtn.addEventListener('click', () => {
