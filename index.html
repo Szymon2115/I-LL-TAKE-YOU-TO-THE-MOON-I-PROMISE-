@@ -122,9 +122,12 @@
 <body>
 
   <!-- Puszin -->
-  <div class="top-right-box" id="puszinBtn">
+<div class="top-right-wrapper" id="puszinBtn">
+  <div class="top-right-box">
     <img src="puszin.jfif" alt="puszin">
   </div>
+  <div class="puszin-text">
+    powód dlaczego cie uwielbiam
 
   <!-- Ciemny panel -->
   <div class="side-panel" id="sidePanel"></div>
@@ -137,10 +140,60 @@
     <div class="text-below" id="bottomText">koham cie twin baardzoo jak na bff przystalo cn</div>
   </div>
 
-  <script>
-    const puszinBtn = document.getElementById('puszinBtn');
-    const sidePanel = document.getElementById('sidePanel');
-    const overlayRight = document.getElementById('overlayRight');
+<script>
+  const btn = document.getElementById('clickBtn');
+  const img = document.getElementById('nugatImg');
+  const area = document.getElementById('middleArea');
+  const topText = document.getElementById('topText');
+  const bottomText = document.getElementById('bottomText');
+
+  const puszinBtn = document.getElementById('puszinBtn');
+  const sidePanel = document.getElementById('sidePanel');
+
+  // jeden overlay do wszystkiego
+  let overlay = document.createElement("div");
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.background = "rgba(0,0,0,0.4)";
+  overlay.style.display = "none";
+  overlay.style.zIndex = "15";
+  document.body.appendChild(overlay);
+
+  // ŚRODEK (fiolet)
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    btn.style.display = 'none';
+    area.style.backgroundColor = '#2a0d36';
+    img.style.display = 'block';
+    topText.style.display = 'block';
+    bottomText.style.display = 'block';
+    overlay.style.display = 'block';
+  });
+
+  // PANEL PRAWEJ
+  puszinBtn.addEventListener('click', () => {
+    sidePanel.classList.add('active');
+    overlay.style.display = 'block';
+  });
+
+  // ZAMYKANIE WSZYSTKIEGO
+  overlay.addEventListener('click', () => {
+    // zamknij środek
+    img.style.display = 'none';
+    topText.style.display = 'none';
+    bottomText.style.display = 'none';
+    area.style.backgroundColor = 'transparent';
+    btn.style.display = 'block';
+
+    // zamknij panel
+    sidePanel.classList.remove('active');
+
+    overlay.style.display = 'none';
+  });
+</script>
 
     puszinBtn.addEventListener('click', () => {
       sidePanel.classList.add('active');
