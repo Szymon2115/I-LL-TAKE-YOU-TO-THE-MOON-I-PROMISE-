@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>kiti kat</title>
+
   <style>
     body {
       margin: 0;
@@ -16,21 +17,27 @@
       align-items: center;
       text-align: center;
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
-    /* Puszin w prawym górnym */
-    .top-right-box {
+    /* ===== PUSZIN + TEKST ===== */
+    .top-right-wrapper {
       position: absolute;
       top: 20px;
       right: 20px;
-      width: 80px;
-      height: 80px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      z-index: 50;
+    }
+
+    .top-right-box {
+      width: 70px;
+      height: 70px;
       border-radius: 8px;
       overflow: hidden;
-      cursor: pointer;
       border: 2px solid white;
-      z-index: 30;
     }
 
     .top-right-box img {
@@ -39,188 +46,29 @@
       object-fit: cover;
     }
 
-    /* Ciemnoszary panel */
+    .puszin-text {
+      font-weight: bold;
+      background: rgba(0,0,0,0.6);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    /* ===== PANEL PRAWEJ ===== */
     .side-panel {
       position: fixed;
       top: 0;
-      right: -300px; /* schowany */
+      right: -300px;
       width: 300px;
       height: 100%;
       background: #2b2b2b;
-      transition: 0.4s ease;
-      z-index: 25;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.6);
+      transition: 0.3s ease;
+      z-index: 40;
+      padding: 20px;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.7);
     }
 
     .side-panel.active {
-      right: 0; /* wysuwa się */
+      right: 0;
     }
 
-    /* overlay do zamykania */
-    .overlay-right {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      display: none;
-      z-index: 20;
-    }
-
-    .overlay-right.active {
-      display: block;
-    }
-
-    /* środek */
-    .middle-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      border-radius: 12px;
-      background-color: transparent;
-      max-width: 80%;
-      transition: 0.3s;
-      position: relative;
-      z-index: 5;
-    }
-
-    .middle-button {
-      font-size: 28px;
-      color: white;
-      text-decoration: none;
-      padding: 15px 30px;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .middle-button:hover {
-      background-color: rgba(0,0,0,0.8);
-    }
-
-    .nugat-img {
-      display: none;
-      max-width: 100%;
-      max-height: 400px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px black;
-      margin-bottom: 20px;
-    }
-
-    .text-below {
-      display: none;
-      font-size: 24px;
-      font-weight: bold;
-      text-shadow: 2px 2px 5px black;
-      margin: 5px 0;
-    }
-
-  </style>
-</head>
-<body>
-
-  <!-- Puszin -->
-<div class="top-right-wrapper" id="puszinBtn">
-  <div class="top-right-box">
-    <img src="puszin.jfif" alt="puszin">
-  </div>
-  <div class="puszin-text">
-    powód dlaczego cie uwielbiam
-
-  <!-- Ciemny panel -->
-  <div class="side-panel" id="sidePanel"></div>
-  <div class="overlay-right" id="overlayRight"></div>
-
-  <div class="middle-area" id="middleArea">
-    <a href="#" class="middle-button" id="clickBtn">Kliknij mnie</a>
-    <img src="nugat.jfif" alt="nugat" class="nugat-img" id="nugatImg">
-    <div class="text-below" id="topText">Wiem że minely juz walentynki i nie chcialaś tego ale</div>
-    <div class="text-below" id="bottomText">koham cie twin baardzoo jak na bff przystalo cn</div>
-  </div>
-
-<script>
-  const btn = document.getElementById('clickBtn');
-  const img = document.getElementById('nugatImg');
-  const area = document.getElementById('middleArea');
-  const topText = document.getElementById('topText');
-  const bottomText = document.getElementById('bottomText');
-
-  const puszinBtn = document.getElementById('puszinBtn');
-  const sidePanel = document.getElementById('sidePanel');
-
-  // jeden overlay do wszystkiego
-  let overlay = document.createElement("div");
-  overlay.style.position = "fixed";
-  overlay.style.top = "0";
-  overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "100%";
-  overlay.style.background = "rgba(0,0,0,0.4)";
-  overlay.style.display = "none";
-  overlay.style.zIndex = "15";
-  document.body.appendChild(overlay);
-
-  // ŚRODEK (fiolet)
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    btn.style.display = 'none';
-    area.style.backgroundColor = '#2a0d36';
-    img.style.display = 'block';
-    topText.style.display = 'block';
-    bottomText.style.display = 'block';
-    overlay.style.display = 'block';
-  });
-
-  // PANEL PRAWEJ
-  puszinBtn.addEventListener('click', () => {
-    sidePanel.classList.add('active');
-    overlay.style.display = 'block';
-  });
-
-  // ZAMYKANIE WSZYSTKIEGO
-  overlay.addEventListener('click', () => {
-    // zamknij środek
-    img.style.display = 'none';
-    topText.style.display = 'none';
-    bottomText.style.display = 'none';
-    area.style.backgroundColor = 'transparent';
-    btn.style.display = 'block';
-
-    // zamknij panel
-    sidePanel.classList.remove('active');
-
-    overlay.style.display = 'none';
-  });
-</script>
-
-    puszinBtn.addEventListener('click', () => {
-      sidePanel.classList.add('active');
-      overlayRight.classList.add('active');
-    });
-
-    overlayRight.addEventListener('click', () => {
-      sidePanel.classList.remove('active');
-      overlayRight.classList.remove('active');
-    });
-
-    // środkowy klik
-    const btn = document.getElementById('clickBtn');
-    const img = document.getElementById('nugatImg');
-    const area = document.getElementById('middleArea');
-    const topText = document.getElementById('topText');
-    const bottomText = document.getElementById('bottomText');
-
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      btn.style.display = 'none';
-      area.style.backgroundColor = '#2a0d36';
-      img.style.display = 'block';
-      topText.style.display = 'block';
-      bottomText.style.display = 'block';
-    });
-  </script>
-
-</body>
-</html>
+    /* ===== Ś*
