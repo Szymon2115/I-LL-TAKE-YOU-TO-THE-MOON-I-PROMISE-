@@ -185,7 +185,7 @@
     const bottomText = document.getElementById('bottomText');
 
     // muzyka w tle
-    const audio = new Audio("I Really Want to Stay At Your House by Rosa Walton _ Music Video.mp3");
+    const audio = new Audio("music.mp3");
     audio.loop = true;
 
     // klik środek → start muzyki + pokaz środek
@@ -200,7 +200,7 @@
 
       // start muzyki po kliknięciu (przeglądarki nie blokują)
       audio.play().catch(() => {
-        alert("Kliknij przycisk jeszcze raz, przeglądarka blokuje autoplay dźwięku.");
+        alert("jesteś wspaniała <3.");
       });
     });
 
