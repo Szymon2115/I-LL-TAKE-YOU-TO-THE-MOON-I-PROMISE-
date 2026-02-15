@@ -92,6 +92,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: 0.3s;
+      border: none;
     }
 
     .middle-button:hover {
@@ -166,7 +167,7 @@
 
   <!-- Środek -->
   <div class="middle-area" id="middleArea">
-    <a href="#" class="middle-button" id="clickBtn">Kliknij mnie</a>
+    <button class="middle-button" id="clickBtn">Kliknij mnie</button>
     <img src="nugat.jfif" alt="nugat" class="nugat-img" id="nugatImg">
     <div class="text-below" id="topText">Wiem że minely juz walentynki ale</div>
     <div class="text-below" id="bottomText">koham cie twin, baardzoo</div>
@@ -183,11 +184,11 @@
     const topText = document.getElementById('topText');
     const bottomText = document.getElementById('bottomText');
 
-    // muzyka
+    // muzyka w tle
     const audio = new Audio("I Really Want to Stay At Your House by Rosa Walton _ Music Video.mp3");
     audio.loop = true;
 
-    // klik środek → pokazuj środek + start muzyki
+    // klik środek → start muzyki + pokaz środek
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       btn.style.display = 'none';
@@ -197,8 +198,9 @@
       bottomText.classList.add('show');
       overlay.style.display = 'block';
 
+      // start muzyki po kliknięciu (przeglądarki nie blokują)
       audio.play().catch(() => {
-        console.log("Musisz kliknąć lub odblokować dźwięk w przeglądarce.");
+        alert("Kliknij przycisk jeszcze raz, przeglądarka blokuje autoplay dźwięku.");
       });
     });
 
@@ -210,17 +212,12 @@
 
     // klik overlay → zamknij wszystko
     overlay.addEventListener('click', () => {
-      // zamknij środek
       img.classList.remove('show');
       topText.classList.remove('show');
       bottomText.classList.remove('show');
       area.style.backgroundColor = 'transparent';
       btn.style.display = 'block';
-
-      // zamknij panel prawy
       sidePanel.classList.remove('active');
-
-      // ukryj overlay
       overlay.style.display = 'none';
     });
   </script>
