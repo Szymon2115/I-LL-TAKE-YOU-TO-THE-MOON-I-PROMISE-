@@ -78,7 +78,7 @@
       border-radius: 12px;
       background-color: transparent;
       max-width: 80%;
-      transition: 0.3s;
+      transition: 0.5s ease;
       position: relative;
       z-index: 30;
     }
@@ -91,6 +91,7 @@
       background-color: rgba(0,0,0,0.5);
       border-radius: 8px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     .middle-button:hover {
@@ -99,11 +100,18 @@
 
     .nugat-img {
       display: none;
-      max-width: 110%;
+      max-width: 100%;
       max-height: 450px;
       border-radius: 12px;
       box-shadow: 0 0 20px black;
       margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .nugat-img.show {
+      display: block;
+      opacity: 1;
     }
 
     .text-below {
@@ -112,6 +120,13 @@
       font-weight: bold;
       text-shadow: 2px 2px 5px black;
       margin: 5px 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .text-below.show {
+      display: block;
+      opacity: 1;
     }
 
     /* panel title w prawym panelu */
@@ -122,6 +137,13 @@
       font-size: 22px;
       border-bottom: 1px solid rgba(255,255,255,0.3);
       padding-bottom: 10px;
+    }
+
+    /* mały przycisk zamknij */
+    #closeMiddleBtn {
+      font-size: 18px;
+      margin-top: 10px;
+      padding: 8px 16px;
     }
 
   </style>
@@ -137,13 +159,13 @@
   <div class="side-panel" id="sidePanel">
     <h2 class="panel-title">Powody czemu cie uwielbiam</h2>
     <ul>
-      <li>bustujesz mnie w valo</li>
+      <li>Masz mega vibe</li>
       <li>Zawsze poprawiasz humor</li>
       <li>Jesteś totalny top</li>
     </ul>
   </div>
 
-  <!-- Overlay do wszystkiego -->
+  <!-- Overlay do panelu prawego -->
   <div class="overlay" id="overlay"></div>
 
   <!-- Środek -->
@@ -152,6 +174,7 @@
     <img src="nugat.jfif" alt="nugat" class="nugat-img" id="nugatImg">
     <div class="text-below" id="topText">Wiem że minely juz walentynki i nie chcialaś tego ale</div>
     <div class="text-below" id="bottomText">koham cie twin baardzoo jak na bff przystalo cn</div>
+    <a href="#" class="middle-button" id="closeMiddleBtn">Zamknij</a>
   </div>
 
   <script>
@@ -163,6 +186,7 @@
     const area = document.getElementById('middleArea');
     const topText = document.getElementById('topText');
     const bottomText = document.getElementById('bottomText');
+    const closeMiddleBtn = document.getElementById('closeMiddleBtn');
 
     const overlay = document.getElementById('overlay');
 
@@ -171,9 +195,19 @@
       e.preventDefault();
       btn.style.display = 'none';
       area.style.backgroundColor = '#2a0d36';
-      img.style.display = 'block';
-      topText.style.display = 'block';
-      bottomText.style.display = 'block';
+      img.classList.add('show');
+      topText.classList.add('show');
+      bottomText.classList.add('show');
+    });
+
+    // zamknij środek
+    closeMiddleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      img.classList.remove('show');
+      topText.classList.remove('show');
+      bottomText.classList.remove('show');
+      area.style.backgroundColor = 'transparent';
+      btn.style.display = 'block';
     });
 
     // klik puszin → panel prawy
@@ -182,22 +216,11 @@
       overlay.style.display = 'block';
     });
 
-    // klik overlay → zamknij wszystko
+    // klik overlay → zamknij tylko prawy panel
     overlay.addEventListener('click', () => {
-      // środek
-      img.style.display = 'none';
-      topText.style.display = 'none';
-      bottomText.style.display = 'none';
-      area.style.backgroundColor = 'transparent';
-      btn.style.display = 'block';
-
-      // panel prawy
       sidePanel.classList.remove('active');
-
-      // overlay
       overlay.style.display = 'none';
     });
-
   </script>
 
 </body>
